@@ -2,6 +2,9 @@
 namespace EasySwoole\EasySwoole;
 
 
+use App\Process\ConsumerCrm;
+use App\Process\ConsumerCrmBackbone;
+use EasySwoole\Component\Process\Manager;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
@@ -19,6 +22,8 @@ class EasySwooleEvent implements Event
     public static function mainServerCreate(EventRegister $register)
     {
         // TODO: Implement mainServerCreate() method.
+        Manager::getInstance()->addProcess(new ConsumerCrm());
+        Manager::getInstance()->addProcess(new ConsumerCrmBackbone());
     }
 
     public static function onRequest(Request $request, Response $response): bool
